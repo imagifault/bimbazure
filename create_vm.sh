@@ -35,6 +35,6 @@ az vm boot-diagnostics disable --resource-group $RESOURCE_GRP --name $VM_NAME
 # next step seems to have failed; possibly more time?
 sleep 10s
 # init script 2nd try
-az vm run-command invoke -g $RESOURCE_GRP -n $VM_NAME --command-id RunShellScript --scripts "$(cat ./include/install-docker.sh)"
-az vm run-command invoke -g $RESOURCE_GRP -n $VM_NAME --command-id RunShellScript --scripts "$(cat ./include/cloud-init.sh)"
-az vm run-command invoke -g $RESOURCE_GRP -n $VM_NAME --command-id RunShellScript --scripts "bash /home/azureuser/test_workload.sh 1000 &"
+az vm run-command invoke -g $RESOURCE_GRP -n $VM_NAME --command-id RunShellScript --scripts "$(cat ./include/$dependencies)"
+az vm run-command invoke -g $RESOURCE_GRP -n $VM_NAME --command-id RunShellScript --scripts "$(cat ./include/$init)"
+az vm run-command invoke -g $RESOURCE_GRP -n $VM_NAME --command-id RunShellScript --scripts "$start_cmd"

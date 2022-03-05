@@ -10,6 +10,7 @@ esac
 
 # BEGIN VARS
 TIME_EACH="3600"  # duration for each target in seconds
+PID_PATH="/home/azureuser/n.pid"
 LOG_DIR="/home/azureuser/log"
 LOG_PATH="$LOG_DIR/nukem.log"  # nukem run log path
 LOG_RETENTION=10            # how many logs to keep
@@ -107,10 +108,13 @@ kill_stale() {
 # END FUNCTIONS
 
 # creating new log and rotating
+if [ -f "$PID_PATH" ] && [ -n "$(cat $PID_PATH)" ]; then
+        kill "$(cat $PID_PATH)"
+fi
+echo "$$" > $PID_PATH
 mkdir -p $LOG_DIR
 rotate_file "${LOG_PATH}" $LOG_RETENTION "logs"
 echo -e "==== START $(date +"%F %H:%M") ====\n" | tee -a $LOG_PATH
-kill_stale
 echo -e "$(date +"%F %H:%M") DEBUG: TIME_EACH=${TIME_EACH}s" | tee -a $LOG_PATH
 echo -e "$(date +"%F %H:%M") DEBUG: NUM_RUNS=$NUM_RUNS\n" | tee -a $LOG_PATH
 
@@ -136,7 +140,3 @@ for run in $(seq 1 $NUM_RUNS); do
 done' > /home/azureuser/test_workload.sh
 
 chmod +x /home/azureuser/test_workload.sh
-
-echo 'killall bash; bash /home/azureuser/test_workload.sh 1000 &' > /home/azureuser/restarter.sh
-
-chmod +x /home/azureuser/restarter.sh
