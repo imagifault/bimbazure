@@ -1,8 +1,10 @@
 # bimbazure
 Pet project for testing azure small-scale deployment and management
 
-## include/vars.sh additional parameter for choosing product to deploy
-PRODUCT="DDOSER"  # DDOSER/BOMBARDIER
+## include/vars.sh additional imput parameter: PRODUCT
+PRODUCT="${2:-$DEFAULT_PRODUCT}"  # DDOSER/BOMBARDIER ; DDOSER - default
+
+this also goes to 'Product' tag of the VM
 
 ## UA
 ## СТВОРИТИ ГРУПУ РЕСУРСІВ ТА SSH key pair
@@ -26,11 +28,11 @@ pre-requisites:
 
 ### 1 VM
 cd bimbazure
-bash create_vm.sh we-demo1
+bash create_vm.sh we-demo1 DDOSER/BOMBARDIER
 
 ### 4 VMs (розраховує на передбачуваний неймінг)
 cd bimbazure
-for i in $(seq 1 4); do bash create_vm.sh we-demo${i}; done
+for i in $(seq 1 4); do bash create_vm.sh we-demo${i} DDOSER/BOMBARDIER; done
 
 
 
@@ -50,11 +52,11 @@ update_product.sh - виконує include/cloud-init.sh на ВМ і перез
 
 ### 1 VM
 cd bimbazure
-bash update_product.sh we-demo1
+bash update_product.sh we-demo1 DDOSER/BOMBARDIER
 
 ### 4 VMs (розраховує на передбачуваний неймінг)
 cd bimbazure
-for i in $(seq 1 4); do bash update_product.sh we-demo${i}; done
+for i in $(seq 1 4); do bash update_product.sh we-demo${i} DDOSER/BOMBARDIER; done
 
 
 ## ПЕРЕЗАПУСК
@@ -90,11 +92,11 @@ pre-requisites:
 
 ### 1 VM
 cd bimbazure
-bash create_vm.sh we-demo1
+bash create_vm.sh we-demo1 DDOSER/BOMBARDIER
 
 ### 4 VMs (relies on naming)
 cd bimbazure
-for i in $(seq 1 4); do bash create_vm.sh we-demo${i}; done
+for i in $(seq 1 4); do bash create_vm.sh we-demo${i} DDOSER/BOMBARDIER; done
 
 
 
@@ -114,11 +116,11 @@ update_product.sh -re-executes include/cloud-init.sh and restarts product
 
 ### 1 VM
 cd bimbazure
-bash update_product.sh we-demo1
+bash update_product.sh we-demo1 DDOSER/BOMBARDIER
 
 ### 4 VMs (relies on naming)
 cd bimbazure
-for i in $(seq 1 4); do bash update_product.sh we-demo${i}; done
+for i in $(seq 1 4); do bash update_product.sh we-demo${i} DDOSER/BOMBARDIER; done
 
 
 ## RESTART
