@@ -1,6 +1,9 @@
 # bimbazure
 Pet project for testing azure small-scale deployment and management
 
+## include/vars.sh additional parameter for choosing product to deploy
+PRODUCT="DDOSER"  # DDOSER/BOMBARDIER
+
 ## UA
 ## СТВОРИТИ ГРУПУ РЕСУРСІВ ТА SSH key pair
 bash create_group.sh
