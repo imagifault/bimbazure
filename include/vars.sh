@@ -1,0 +1,6 @@
+RESOURCE_GRP="group_DEMO"
+LOCATION="westeurope"
+MAX_PRICE="0.0125"
+KEY_PATH="/home/cbs/azure/talltom_key.pub"
+TAGS="Group=TEST"
+VM_NAME="$1"
