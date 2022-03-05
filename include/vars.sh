@@ -4,7 +4,7 @@ LOCATION="westeurope"
 MAX_PRICE="0.0125"
 KEY_DIR="./ssh"
 KEY_NAME="useless_key"
-KEY_PATH="${KEY_DIR}/${KEY_NAME}"
+KEY_PATH="${KEY_DIR}/${KEY_NAME}.pub"
 VM_NAME="$1"
 
 #
