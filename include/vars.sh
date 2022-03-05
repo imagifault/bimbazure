@@ -10,6 +10,7 @@ VM_NAME="$1"
 
 # PRODUCT CONFIG
 PRODUCT="DDOSER"  # DDOSER/BOMBARDIER
+#PRODUCT="BOMBARDIER"  # DDOSER/BOMBARDIER
 if [ "$PRODUCT" == "BOMBARDIER" ]; then
         dependencies="install-docker.sh"
         init="cloud-init-bombardier.sh"

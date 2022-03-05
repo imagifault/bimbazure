@@ -94,13 +94,13 @@ switch_server_pvpn() {
 # kill stale containers
 kill_stale() {
     echo -e "$(date +"%F %H:%M") INFO: LOGGING STALE CONTAINERS" | tee -a $LOG_PATH
-    stale_containers="$(docker ps | grep alpine/bombardier | cut -d" " -f1)"
+    stale_containers="$(docker ps -q)"
     if [ "$stale_containers" != "" ]; then
         echo "STALE CONTAINERS: $(echo $stale_containers | wc -l)"
-        for c in $(docker ps | grep alpine/bombardier | cut -d" " -f1); do
+        for c in $(docker ps -q); do
                 echo -e "\n==== CLENAUP STALE $c ===="
-                docker logs $c | tee -a $LOG_PATH;
-                docker stop $c;
+                docker logs $c | tee -a $LOG_PATH 2>&1
+                docker kill $c
                 echo "====="
         done
     fi
@@ -108,11 +108,13 @@ kill_stale() {
 # END FUNCTIONS
 
 # creating new log and rotating
+mkdir -p $LOG_DIR
 if [ -f "$PID_PATH" ] && [ -n "$(cat $PID_PATH)" ]; then
+        echo -e "$(date +"%F %H:%M") INFO: Killing old PID: $(cat PID_PATH)" | tee -a $LOG_PATH
         kill "$(cat $PID_PATH)"
 fi
 echo "$$" > $PID_PATH
-mkdir -p $LOG_DIR
+kill_stale
 rotate_file "${LOG_PATH}" $LOG_RETENTION "logs"
 echo -e "==== START $(date +"%F %H:%M") ====\n" | tee -a $LOG_PATH
 echo -e "$(date +"%F %H:%M") DEBUG: TIME_EACH=${TIME_EACH}s" | tee -a $LOG_PATH

