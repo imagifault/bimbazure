@@ -2,6 +2,16 @@
 Pet project for testing azure small-scale deployment and management
 
 ## UA
+## СТВОРИТИ ГРУПУ РЕСУРСІВ ТА SSH key pair
+bash create_group.sh
+
+це створить:
+
+  - resource group (ім'я конфігурується в include/vars.sh)
+  - ssh key pair (name configured in include/vars.sh)
+  - скопіює пару ssh ключів в ./ssh и видасть права 0600
+
+
 ## СТВОРИТИ
 create_vm.sh - на нових віртуалках виконується include/cloud-init.sh
 
@@ -57,6 +67,15 @@ for i in $(seq 1 4); do bash restart_product.sh we-demo${i}; done
 
 
 ## EN
+## BEFORE CREATING VMs
+bash create_group.sh
+
+this will create:
+
+  - resource group with name configured in include/vars.sh
+  - create ssh key pair (name configured in include/vars.sh)
+  - put ssh key pair under ./ssh and set proper permissions
+
 ## CREATE
 create_vm.sh - new VMs have include/cloud-init.sh executed on them
 
