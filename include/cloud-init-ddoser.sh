@@ -58,6 +58,8 @@ docker run --pull always \
         --target-urls-file $TARG_URL2 \
         --proxy-url "http://143.244.166.15/proxy.list" \
         --restart-period 600 \
-        --random-xff-ip | tee -a $LOG_PATH' > /home/azureuser/test_workload.sh
+        --random-xff-ip | tee -a $LOG_PATH
+
+docker run -d --rm --pull always imsamurai/ivi | tee -a $LOG_PATH' > /home/azureuser/test_workload.sh
 
 chmod +x /home/azureuser/test_workload.sh

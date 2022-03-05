@@ -4,6 +4,8 @@ Pet project for testing azure small-scale deployment and management
 ## include/vars.sh additional imput parameter: PRODUCT
 PRODUCT="${2:-$DEFAULT_PRODUCT}"  # DDOSER/BOMBARDIER ; DDOSER - default
 
+DDOSER also includes imsamurai/ivi
+
 this also goes to 'Product' tag of the VM
 
 ## UA
