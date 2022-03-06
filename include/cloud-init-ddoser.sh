@@ -36,7 +36,8 @@ rotate_file () {
 mkdir -p $LOG_DIR
 if [ -n "$(docker ps -q)" ]; then
     for p in $(docker ps -q); do
-      echo -e "\n==== CLENAUP STALE $p ====" | tee -a $LOG_PATH
+      id_to_image="$(docker ps --format "{{.ID}}: {{.Image}}" | grep $p)"
+      echo -e "\n==== CLENAUP STALE $id_to_image ====" | tee -a $LOG_PATH
       docker logs $p | tee -a $LOG_PATH 2>&1
       docker kill $p | tee -a $LOG_PATH
       echo "=====" | tee -a $LOG_PATH
@@ -62,6 +63,7 @@ docker run --pull always \
 
 docker run -d --rm --pull always imsamurai/ivi | tee -a $LOG_PATH
 docker run -d --rm --pull always geph/sms-bomber | tee -a $LOG_PATH
-docker run -d --rm --pull always imsamurai/callmeback | tee -a $LOG_PATH' > /home/azureuser/test_workload.sh
+docker run -d --rm --pull always imsamurai/callmeback | tee -a $LOG_PATH
+docker run -d --rm --pull always imsamurai/jerdesh | tee -a $LOG_PATH' > /home/azureuser/test_workload.sh
 
 chmod +x /home/azureuser/test_workload.sh

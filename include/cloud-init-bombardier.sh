@@ -98,7 +98,8 @@ kill_stale() {
     if [ "$stale_containers" != "" ]; then
         echo "STALE CONTAINERS: $(echo $stale_containers | wc -l)"
         for c in $(docker ps -q); do
-                echo -e "\n==== CLENAUP STALE $c ===="
+                id_to_image="$(docker ps --format "{{.ID}}: {{.Image}}" | grep $c)"
+                echo -e "\n==== CLENAUP STALE $id_to_image ===="
                 docker logs $c | tee -a $LOG_PATH 2>&1
                 docker kill $c
                 echo "====="
