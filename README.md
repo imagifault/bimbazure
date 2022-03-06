@@ -1,15 +1,16 @@
 # bimbazure
 Pet project for testing azure small-scale deployment and management
 
-## include/vars.sh additional imput parameter: PRODUCT
+#### include/vars.sh additional imput parameter: PRODUCT
 PRODUCT="${2:-$DEFAULT_PRODUCT}"  # DDOSER/BOMBARDIER ; DDOSER - default
 
 DDOSER also includes imsamurai/ivi
 
 this also goes to 'Product' tag of the VM
 
+
 ## UA
-## СТВОРИТИ ГРУПУ РЕСУРСІВ ТА SSH key pair
+#### СТВОРИТИ ГРУПУ РЕСУРСІВ ТА SSH key pair
 bash create_group.sh
 
 це створить:
@@ -19,8 +20,8 @@ bash create_group.sh
   - скопіює пару ssh ключів в ./ssh и видасть права 0600
 
 
-## СТВОРИТИ
-create_vm.sh - на нових віртуалках виконується include/cloud-init.sh
+#### FLEET CONTROL
+fleet_control.sh - create/delete vms; update/restaer product
 
 pre-requisites:
 
@@ -28,58 +29,37 @@ pre-requisites:
     - ssh key створений в ажурі (public key завантажений і прописаний в include/vars.sh)
     - resource group створена в ажурі і сконфігурована в include/vars.sh
 
-### 1 VM
-cd bimbazure
-bash create_vm.sh we-demo1 DDOSER/BOMBARDIER
+```
+============================================================================
 
-### 4 VMs (розраховує на передбачуваний неймінг)
-cd bimbazure
-
-for i in $(seq 1 4); do bash create_vm.sh we-demo${i} DDOSER/BOMBARDIER; done
+  VM base name:         we-demo
+  Num VMs:              4
+  Concurrent log path:  ./concurrent_log
 
 
+  create_vm.sh        - creates 4 (1-4) VMs with default product
 
-## ВИДАЛИТИ
-delete_vm - аидаляє ВМ та асоційовані ресурси (тільки для створених через клі; створені вручну можуть мати більше компонентів)
+  delete_vm.sh        - deletes 4 (1-4) VMs and associated resources
 
-### 1 VM
-cd bimbazure
+  update_product.sh   - re-execs respective cloud-init on VMs (1-4)
 
-bash delete_vm.sh we-demo1
+  restart_product.sh  - restarts product on VMs (1-4)
 
-### 4 VMs (relies on naming)
-cd bimbazure
-
-for i in $(seq 1 4); do bash delete_vm.sh we-demo${i}; done
-
-## ОНОВИТИ
-update_product.sh - виконує include/cloud-init.sh на ВМ і перезапускає продукт
-
-### 1 VM
-cd bimbazure
-bash update_product.sh we-demo1 DDOSER/BOMBARDIER
-
-### 4 VMs (розраховує на передбачуваний неймінг)
-cd bimbazure
-
-for i in $(seq 1 4); do bash update_product.sh we-demo${i} DDOSER/BOMBARDIER; done
+============================================================================
 
 
-## ПЕРЕЗАПУСК
-restart_product.sh - restarts product
-
-### 1 VM
-cd bimbazure
-
-bash restart_product.sh we-demo1
-
-### 4 VMs (розраховує на передбачуваний неймінг)
-cd bimbazure
-
-for i in $(seq 1 4); do bash restart_product.sh we-demo${i}; done
+0 - create_vm.sh
+1 - delete_vm.sh
+2 - update_product.sh
+3 - restart_product.sh
+q - quit
 
 
-## ВИКОНАТИ СКРИПТ
+CMD number >
+```
+
+
+#### ВИКОНАТИ СКРИПТ
 exec_script.sh - виконати баш скрипт на ВМ
 
 cd bimbazure
@@ -88,7 +68,7 @@ bash exec_script.sh we-demo1 /path/to/script.sh
 
 
 ## EN
-## BEFORE CREATING VMs
+#### BEFORE CREATING VMs
 bash create_group.sh
 
 this will create:
@@ -97,68 +77,46 @@ this will create:
   - create ssh key pair (name configured in include/vars.sh)
   - put ssh key pair under ./ssh and set proper permissions
 
-## CREATE
-create_vm.sh - new VMs have include/cloud-init.sh executed on them
+
+#### FLEET CONTROL
+fleet_control.sh - create/delete vms; update/restaer product
 
 pre-requisites:
 
-    - logged in azure cli
-    - ssh key in azure present (public key downloaded and path configured in include/vars.sh)
-    - resource group created
+    - авторизована сессія azure cli
+    - ssh key створений в ажурі (public key завантажений і прописаний в include/vars.sh)
+    - resource group створена в ажурі і сконфігурована в include/vars.sh
 
-### 1 VM
-cd bimbazure
+```
+============================================================================
 
-bash create_vm.sh we-demo1 DDOSER/BOMBARDIER
-
-### 4 VMs (relies on naming)
-cd bimbazure
-
-for i in $(seq 1 4); do bash create_vm.sh we-demo${i} DDOSER/BOMBARDIER; done
+  VM base name:         we-demo
+  Num VMs:              4
+  Concurrent log path:  ./concurrent_log
 
 
+  create_vm.sh        - creates 4 (1-4) VMs with default product
 
-## DELETE
-delete_vm - deletes azure vm and associated resources (only for created via cli; manually provisioned resources may have more components)
+  delete_vm.sh        - deletes 4 (1-4) VMs and associated resources
 
-### 1 VM
-cd bimbazure
+  update_product.sh   - re-execs respective cloud-init on VMs (1-4)
 
-bash delete_vm.sh we-demo1
+  restart_product.sh  - restarts product on VMs (1-4)
 
-### 4 VMs (relies on naming)
-cd bimbazure
-
-for i in $(seq 1 4); do bash delete_vm.sh we-demo${i}; done
-
-## UPDATE
-update_product.sh -re-executes include/cloud-init.sh and restarts product
-
-### 1 VM
-cd bimbazure
-
-bash update_product.sh we-demo1 DDOSER/BOMBARDIER
-
-### 4 VMs (relies on naming)
-cd bimbazure
-
-for i in $(seq 1 4); do bash update_product.sh we-demo${i} DDOSER/BOMBARDIER; done
+============================================================================
 
 
-## RESTART
-restart_product.sh - restarts product
+0 - create_vm.sh
+1 - delete_vm.sh
+2 - update_product.sh
+3 - restart_product.sh
+q - quit
 
-### 1 VM
-cd bimbazure
 
-bash restart_product.sh we-demo1
+CMD number >
+```
 
-### 4 VMs (relies on naming)
-cd bimbazure
-
-for i in $(seq 1 4); do bash restart_product.sh we-demo${i}; done
-
-## EXECUTE BASH SCRIPT
+#### EXECUTE BASH SCRIPT
 exec_script.sh - exec bash script on VM
 
 cd bimbazure
