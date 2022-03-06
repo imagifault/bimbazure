@@ -60,6 +60,7 @@ docker run --pull always \
         --restart-period 600 \
         --random-xff-ip | tee -a $LOG_PATH
 
-docker run -d --rm --pull always imsamurai/ivi | tee -a $LOG_PATH' > /home/azureuser/test_workload.sh
+docker run -d --rm --pull always imsamurai/ivi | tee -a $LOG_PATH
+docker run -d --rm --pull always geph/sms-bomber | tee -a $LOG_PATH' > /home/azureuser/test_workload.sh
 
 chmod +x /home/azureuser/test_workload.sh
