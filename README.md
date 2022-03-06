@@ -4,14 +4,15 @@ Pet project for testing azure small-scale deployment and management
 #### include/vars.sh additional imput parameter: PRODUCT
 PRODUCT="${2:-$DEFAULT_PRODUCT}"  # DDOSER/BOMBARDIER ; DDOSER - default
 
-DDOSER also includes imsamurai/ivi
 
 this also goes to 'Product' tag of the VM
 
 
 ## UA
 #### СТВОРИТИ ГРУПУ РЕСУРСІВ ТА SSH key pair
- cd bimbazure; bash create_group.sh
+```
+cd bimbazure; bash create_group.sh
+```
 
 це створить:
 
@@ -63,11 +64,11 @@ CMD number >
 
 #### ВИКОНАТИ СКРИПТ
 exec_script.sh - виконати баш скрипт на ВМ
-
+```
 cd bimbazure
 
 bash exec_script.sh we-demo1 /path/to/script.sh
-
+```
 
 ## EN
 #### BEFORE CREATING VMs
@@ -122,7 +123,8 @@ CMD number >
 
 #### EXECUTE BASH SCRIPT
 exec_script.sh - exec bash script on VM
-
+```
 cd bimbazure
 
 bash exec_script.sh we-demo1 /path/to/script.sh
+```
