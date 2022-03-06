@@ -23,9 +23,9 @@ cd bimbazure; bash create_group.sh
 
 #### FLEET CONTROL
 fleet_control.sh - create/delete vms; update/restaer product
-
+```
 cd bimbazure; bash fleet_control.sh
-
+```
 pre-requisites:
 
     - авторизована сессія azure cli
@@ -37,16 +37,17 @@ pre-requisites:
 
   VM base name:         we-demo
   Num VMs:              4
-  Concurrent log path:  ./concurrent_log
+  Product:              DDOSER
+  Concurrent log path:  ./concurrent_log 
 
 
-  create_vm.sh        - creates 4 (1-4) VMs with default product
+  create_vm.sh        - creates 4 (1-4) VMs with default product 
 
-  delete_vm.sh        - deletes 4 (1-4) VMs and associated resources
+  delete_vm.sh        - deletes 4 (1-4) VMs and associated resources 
 
-  update_product.sh   - re-execs respective cloud-init on VMs (1-4)
+  update_product.sh   - re-execs respective cloud-init on VMs (1-4) 
 
-  restart_product.sh  - restarts product on VMs (1-4)
+  restart_product.sh  - restarts product on VMs (1-4) 
 
 ============================================================================
 
