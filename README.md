@@ -34,6 +34,7 @@ bash create_vm.sh we-demo1 DDOSER/BOMBARDIER
 
 ### 4 VMs (розраховує на передбачуваний неймінг)
 cd bimbazure
+
 for i in $(seq 1 4); do bash create_vm.sh we-demo${i} DDOSER/BOMBARDIER; done
 
 
@@ -43,10 +44,12 @@ delete_vm - аидаляє ВМ та асоційовані ресурси (ті
 
 ### 1 VM
 cd bimbazure
+
 bash delete_vm.sh we-demo1
 
 ### 4 VMs (relies on naming)
 cd bimbazure
+
 for i in $(seq 1 4); do bash delete_vm.sh we-demo${i}; done
 
 ## ОНОВИТИ
@@ -58,6 +61,7 @@ bash update_product.sh we-demo1 DDOSER/BOMBARDIER
 
 ### 4 VMs (розраховує на передбачуваний неймінг)
 cd bimbazure
+
 for i in $(seq 1 4); do bash update_product.sh we-demo${i} DDOSER/BOMBARDIER; done
 
 
@@ -66,11 +70,21 @@ restart_product.sh - restarts product
 
 ### 1 VM
 cd bimbazure
+
 bash restart_product.sh we-demo1
 
 ### 4 VMs (розраховує на передбачуваний неймінг)
 cd bimbazure
+
 for i in $(seq 1 4); do bash restart_product.sh we-demo${i}; done
+
+
+## ВИКОНАТИ СКРИПТ
+exec_script.sh - виконати баш скрипт на ВМ
+
+cd bimbazure
+
+bash exec_script.sh we-demo1 /path/to/script.sh
 
 
 ## EN
@@ -94,10 +108,12 @@ pre-requisites:
 
 ### 1 VM
 cd bimbazure
+
 bash create_vm.sh we-demo1 DDOSER/BOMBARDIER
 
 ### 4 VMs (relies on naming)
 cd bimbazure
+
 for i in $(seq 1 4); do bash create_vm.sh we-demo${i} DDOSER/BOMBARDIER; done
 
 
@@ -107,10 +123,12 @@ delete_vm - deletes azure vm and associated resources (only for created via cli;
 
 ### 1 VM
 cd bimbazure
+
 bash delete_vm.sh we-demo1
 
 ### 4 VMs (relies on naming)
 cd bimbazure
+
 for i in $(seq 1 4); do bash delete_vm.sh we-demo${i}; done
 
 ## UPDATE
@@ -118,10 +136,12 @@ update_product.sh -re-executes include/cloud-init.sh and restarts product
 
 ### 1 VM
 cd bimbazure
+
 bash update_product.sh we-demo1 DDOSER/BOMBARDIER
 
 ### 4 VMs (relies on naming)
 cd bimbazure
+
 for i in $(seq 1 4); do bash update_product.sh we-demo${i} DDOSER/BOMBARDIER; done
 
 
@@ -130,8 +150,17 @@ restart_product.sh - restarts product
 
 ### 1 VM
 cd bimbazure
+
 bash restart_product.sh we-demo1
 
 ### 4 VMs (relies on naming)
 cd bimbazure
+
 for i in $(seq 1 4); do bash restart_product.sh we-demo${i}; done
+
+## EXECUTE BASH SCRIPT
+exec_script.sh - exec bash script on VM
+
+cd bimbazure
+
+bash exec_script.sh we-demo1 /path/to/script.sh
