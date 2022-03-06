@@ -11,7 +11,7 @@ this also goes to 'Product' tag of the VM
 
 ## UA
 #### СТВОРИТИ ГРУПУ РЕСУРСІВ ТА SSH key pair
-bash create_group.sh
+ cd bimbazure; bash create_group.sh
 
 це створить:
 
@@ -22,6 +22,8 @@ bash create_group.sh
 
 #### FLEET CONTROL
 fleet_control.sh - create/delete vms; update/restaer product
+
+cd bimbazure; bash fleet_control.sh
 
 pre-requisites:
 
@@ -80,6 +82,8 @@ this will create:
 
 #### FLEET CONTROL
 fleet_control.sh - create/delete vms; update/restaer product
+
+cd bimbazure; bash fleet_control.sh
 
 pre-requisites:
 
