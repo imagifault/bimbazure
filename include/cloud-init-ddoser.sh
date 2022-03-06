@@ -36,7 +36,7 @@ rotate_file () {
 mkdir -p $LOG_DIR
 if [ -n "$(docker ps -q)" ]; then
     for p in $(docker ps -q); do
-      echo -e "\n==== CLENAUP STALE $c ====" | tee -a $LOG_PATH
+      echo -e "\n==== CLENAUP STALE $p ====" | tee -a $LOG_PATH
       docker logs $p | tee -a $LOG_PATH 2>&1
       docker kill $p | tee -a $LOG_PATH
       echo "=====" | tee -a $LOG_PATH
