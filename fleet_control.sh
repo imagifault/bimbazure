@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # VARS
+source ./include/vars.sh
 VM_NAME_BASE="we-demo"
 VM_NUM=4
 PRODUCT="DDOSER"
@@ -14,6 +15,7 @@ CMDS=("create_vm.sh"
 # BEGIN FUNCTIONS
 greeter () {
   echo -e "============================================================================\n
+  Resource group:       $RESOURCE_GRP
   VM base name:         $VM_NAME_BASE
   Num VMs:              $VM_NUM
   Product:              $PRODUCT
