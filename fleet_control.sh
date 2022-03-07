@@ -31,6 +31,7 @@ greeter () {
   VM base name:         $VM_NAME_BASE
   Num VMs:              $VM_NUM
   Starting with:        ${VM_NAME_BASE}${vm_start}
+  Ending with with:     ${VM_NAME_BASE}${vm_end}
   Product:              $PRODUCT
   Concurrent log path:  $LOG_PATH \n\n
   create_vm.sh        - creates $VM_NUM (1-$VM_NUM) VMs with default product
@@ -58,6 +59,7 @@ while [ -z "$(echo $(seq 0 $((${#PRDCTS[@]}-1))) | grep -w $prdct_num)" ]; do
 done
 PRODUCT="${PRDCTS[$prdct_num]}"
 
+# VM start
 read -p "VM index start (1 - $VM_NUM) > " vm_start
 while [ -z "$(echo $(seq 1 $VM_NUM) | grep -w $vm_start)" ]; do
         if [ "$vm_start" == "q" ]; then
@@ -65,6 +67,16 @@ while [ -z "$(echo $(seq 1 $VM_NUM) | grep -w $vm_start)" ]; do
                 exit 0
         fi
         read -p "VM index start (1 - $VM_NUM) > " vm_start
+done
+
+# VM end
+read -p "VM index end ($vm_start - $VM_NUM) > " vm_end
+while [ -z "$(echo $(seq $vm_start $VM_NUM) | grep -w $vm_end)" ]; do
+        if [ "$vm_start" == "q" ]; then
+                echo "Quitting"
+                exit 0
+        fi
+        read -p "VM index start ($vm_start - $VM_NUM) > " vm_end
 done
 
 while :; do
@@ -78,7 +90,7 @@ while :; do
                     echo "ERROR: numbers from 0 to $((${#CMDS[@]}-1))"
                     read -p '> '
                   else
-                    for i in $(seq $vm_start $VM_NUM); do
+                    for i in $(seq $vm_start $vm_end); do
                       mkdir -p $LOG_PATH
                       echo "======================================================" | tee ${LOG_PATH}/${VM_NAME_BASE}${i}_log
                       echo "COMMAND: bash ./${CMDS[$cmd_num]} ${VM_NAME_BASE}${i}" | tee -a ${LOG_PATH}/${VM_NAME_BASE}${i}_log
