@@ -8,7 +8,8 @@ LOG_PATH="./concurrent_log"
 CMDS=("create_vm.sh"
         "delete_vm.sh"
         "update_product.sh"
-        "restart_product.sh")
+        "restart_product.sh"
+        "update_publicIP.sh")
 
 # BEGIN FUNCTIONS
 greeter () {
@@ -17,10 +18,11 @@ greeter () {
   Num VMs:              $VM_NUM
   Product:              $PRODUCT
   Concurrent log path:  $LOG_PATH \n\n
-  create_vm.sh        - creates $VM_NUM (1-$VM_NUM) VMs with default product \n
-  delete_vm.sh        - deletes $VM_NUM (1-$VM_NUM) VMs and associated resources \n
-  update_product.sh   - re-execs respective cloud-init on VMs (1-$VM_NUM) \n
-  restart_product.sh  - restarts product on VMs (1-$VM_NUM) \n
+  create_vm.sh        - creates $VM_NUM (1-$VM_NUM) VMs with default product
+  delete_vm.sh        - deletes $VM_NUM (1-$VM_NUM) VMs and associated resources
+  update_product.sh   - re-execs respective cloud-init on VMs (1-$VM_NUM)
+  restart_product.sh  - restarts product on VMs (1-$VM_NUM)
+  update_publicIP.sh  - re-creates public IP on VMs (1-$VM_NUM) \n
 ============================================================================\n\n"
 
 

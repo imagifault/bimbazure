@@ -38,16 +38,14 @@ pre-requisites:
   VM base name:         we-demo
   Num VMs:              4
   Product:              DDOSER
-  Concurrent log path:  ./concurrent_log
+  Concurrent log path:  ./concurrent_log 
 
 
   create_vm.sh        - creates 4 (1-4) VMs with default product
-
   delete_vm.sh        - deletes 4 (1-4) VMs and associated resources
-
   update_product.sh   - re-execs respective cloud-init on VMs (1-4)
-
   restart_product.sh  - restarts product on VMs (1-4)
+  update_publicIP.sh  - re-creates public IP on VMs (1-4) 
 
 ============================================================================
 
@@ -56,6 +54,7 @@ pre-requisites:
 1 - delete_vm.sh
 2 - update_product.sh
 3 - restart_product.sh
+4 - update_publicIP.sh
 q - quit
 
 
@@ -99,16 +98,14 @@ pre-requisites:
   VM base name:         we-demo
   Num VMs:              4
   Product:              DDOSER
-  Concurrent log path:  ./concurrent_log
+  Concurrent log path:  ./concurrent_log 
 
 
   create_vm.sh        - creates 4 (1-4) VMs with default product
-
   delete_vm.sh        - deletes 4 (1-4) VMs and associated resources
-
   update_product.sh   - re-execs respective cloud-init on VMs (1-4)
-
   restart_product.sh  - restarts product on VMs (1-4)
+  update_publicIP.sh  - re-creates public IP on VMs (1-4) 
 
 ============================================================================
 
@@ -117,6 +114,7 @@ pre-requisites:
 1 - delete_vm.sh
 2 - update_product.sh
 3 - restart_product.sh
+4 - update_publicIP.sh
 q - quit
 
 
