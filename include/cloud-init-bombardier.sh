@@ -1,12 +1,5 @@
 echo '#!/usr/bin/env bash
 
-case "$1" in
-        ""|*[!0-9]*)
-            echo "USAGE: $0 <number_of_iterations>"
-            exit 1
-        ;;
-esac
-
 
 # BEGIN VARS
 TIME_EACH="3600"  # duration for each target in seconds
