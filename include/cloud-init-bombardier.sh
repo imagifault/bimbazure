@@ -10,7 +10,7 @@ esac
 
 # BEGIN VARS
 TIME_EACH="3600"  # duration for each target in seconds
-PID_PATH="$BOMBARDIER_PID_PATH"
+PID_PATH="/home/azureuser/n.pid"
 LOG_DIR="/home/azureuser/log"
 LOG_PATH="$LOG_DIR/nukem.log"  # nukem run log path
 LOG_RETENTION=10            # how many logs to keep

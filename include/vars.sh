@@ -20,7 +20,6 @@ if [ -z "$(echo $VALID_PRODUCTS | grep -w $PRODUCT)" ]; then
         exit 1
 fi
 TAGS="Product=${PRODUCT}"
-BOMBARDIER_PID_PATH="/home/azureuser/n.pid"
 
 if [ "$PRODUCT" == "BOMBARDIER" ]; then
         dependencies="install-docker.sh"
