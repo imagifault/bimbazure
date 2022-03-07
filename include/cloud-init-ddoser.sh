@@ -49,7 +49,7 @@ echo -e "==== START $(date +"%F %H:%M") ====\n" | tee -a $LOG_PATH
 docker run --pull always \
         --ulimit nofile=100000:100000 \
         -d --rm imsamurai/ddoser \
-        --concurrency 250 \
+        --concurrency 400 \
         --timeout 20 \
         --with-random-get-param \
         --user-agent "$USER_AGENTS" \
