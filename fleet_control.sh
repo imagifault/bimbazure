@@ -11,13 +11,12 @@ CMDS=("create_vm.sh"
         "update_product.sh"
         "restart_product.sh"
         "update_publicIP.sh")
-PRDCTS=("DDOSER" "BOMBARDIER")
 
 # BEGIN FUNCTIONS
 choose_product () {
   echo "Choose product: "
-  for i in $(seq 0 $((${#PRDCTS[@]}-1))); do
-    echo "$i - ${PRDCTS[$i]}"
+  for i in $(seq 0 $((${#VALID_PRODUCTS[@]}-1))); do
+    echo "$i - ${VALID_PRODUCTS[$i]}"
   done
   echo "q - quit"
   echo -e "\n"
@@ -50,14 +49,14 @@ greeter () {
 }
 # END FUNCTIONS
 
-while [ -z "$(echo $(seq 0 $((${#PRDCTS[@]}-1))) | grep -w $prdct_num)" ]; do
+while [ -z "$(echo $(seq 0 $((${#VALID_PRODUCTS[@]}-1))) | grep -w $prdct_num)" ]; do
         if [ "$prdct_num" == "q" ]; then
                 echo "Quitting"
                 exit 0
         fi
         choose_product
 done
-PRODUCT="${PRDCTS[$prdct_num]}"
+PRODUCT="${VALID_PRODUCTS[$prdct_num]}"
 
 # VM start
 read -p "VM index start (1 - $VM_NUM) > " vm_start

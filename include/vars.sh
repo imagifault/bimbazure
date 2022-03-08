@@ -10,13 +10,13 @@ VM_NAME="$1"
 #
 # PRODUCT CONFIG
 DEFAULT_PRODUCT=DDOSER
-VALID_PRODUCTS="BOMBARDIER DDOSER"
+VALID_PRODUCTS=("BOMBARDIER" "DDOSER")
 PRODUCT="${2:-$DEFAULT_PRODUCT}"  # DDOSER/BOMBARDIER ; DDOSER - default
                                   # DDOSER also installs imsamurai/ivi
 # validate product
-if [ -z "$(echo $VALID_PRODUCTS | grep -w $PRODUCT)" ]; then
+if [ -z "$(echo ${VALID_PRODUCTS[@]} | grep -w $PRODUCT)" ]; then
         echo "ERROR: unknown product: $PRODUCT"
-        echo "Valid products: $VALID_PRODUCTS"
+        echo "Valid products: ${VALID_PRODUCTS[@]}"
         exit 1
 fi
 TAGS="Product=${PRODUCT}"
