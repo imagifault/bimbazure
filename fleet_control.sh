@@ -33,8 +33,8 @@ greeter () {
   Ending with with:     ${VM_NAME_BASE}${vm_end}
   Product:              $PRODUCT
   Concurrent log path:  $LOG_PATH \n\n
-  create_vm.sh        - creates $VM_NUM (1-$VM_NUM) VMs with default product
-  delete_vm.sh        - deletes $VM_NUM (1-$VM_NUM) VMs and associated resources
+  create_vm.sh        - creates $(($vm_end-$vm_start+1)) ($vm_start-$vm_end) VMs
+  delete_vm.sh        - deletes $(($vm_end-$vm_start+1)) ($vm_start-$vm_end) VMs and associated resources
   update_product.sh   - re-execs respective cloud-init on VMs (1-$VM_NUM)
   restart_product.sh  - restarts product on VMs (1-$VM_NUM)
   update_publicIP.sh  - re-creates public IP on VMs (1-$VM_NUM) \n
