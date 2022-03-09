@@ -10,7 +10,7 @@ VM_NAME="$1"
 #
 # PRODUCT CONFIG
 DEFAULT_PRODUCT=DDOSER
-VALID_PRODUCTS=("BOMBARDIER" "DDOSER")
+VALID_PRODUCTS=("BOMBARDIER" "DDOSER" "MHDDOS")
 PRODUCT="${2:-$DEFAULT_PRODUCT}"  # DDOSER/BOMBARDIER ; DDOSER - default
                                   # DDOSER also installs imsamurai/ivi
 # validate product
@@ -25,8 +25,12 @@ if [ "$PRODUCT" == "BOMBARDIER" ]; then
         dependencies="install-docker.sh"
         init="cloud-init-bombardier.sh"
         start_cmd="bash /home/azureuser/test_workload.sh &"
-else
+elif [ "$PRODUCT" == "DDOSER" ]; then
         dependencies="install-docker.sh"
         init="cloud-init-ddoser.sh"
         start_cmd="bash /home/azureuser/test_workload.sh"
+else
+        dependencies="mhddos-deps.sh"
+        init="cloud-init-mhddos.sh"
+        start_cmd="bash /home/azureuser/test_workload.sh &"
 fi

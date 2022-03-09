@@ -1,8 +1,11 @@
 # bimbazure
 Pet project for testing azure small-scale deployment and management
 
-#### include/vars.sh additional imput parameter: PRODUCT
-PRODUCT="${2:-$DEFAULT_PRODUCT}"  # DDOSER/BOMBARDIER ; DDOSER - default
+#### WARNING: MHDDOS product is in testing
+
+  - limits/methods in include/cloud-init-mhddos.sh may not be optimal
+  - currently restart_product.sh/update_product.sh restart only control scipt
+    and not the MHDdDoS process; for now - recreate vm if you want to restart MHDDoS
 
 
 this also goes to 'Product' tag of the VM
