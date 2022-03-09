@@ -28,7 +28,7 @@ if [ "$PRODUCT" == "BOMBARDIER" ]; then
 elif [ "$PRODUCT" == "DDOSER" ]; then
         dependencies="install-docker.sh"
         init="cloud-init-ddoser.sh"
-        start_cmd="bash /home/azureuser/test_workload.sh"
+        start_cmd="bash /home/azureuser/test_workload.sh &"
 else
         dependencies="mhddos-deps.sh"
         init="cloud-init-mhddos.sh"
