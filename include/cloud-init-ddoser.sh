@@ -57,6 +57,7 @@ docker run --pull always \
         --log-to-stdout \
         --target-urls-file $TARG_URL \
         --target-urls-file $TARG_URL2 \
+        --proxy-url "http://143.244.166.15/proxy.list" \
         --restart-period 600 \
         --random-xff-ip | tee -a $LOG_PATH
 
