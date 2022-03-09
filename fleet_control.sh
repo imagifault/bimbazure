@@ -35,9 +35,9 @@ greeter () {
   Concurrent log path:  $LOG_PATH \n\n
   create_vm.sh        - creates $(($vm_end-$vm_start+1)) ($vm_start-$vm_end) VMs
   delete_vm.sh        - deletes $(($vm_end-$vm_start+1)) ($vm_start-$vm_end) VMs and associated resources
-  update_product.sh   - re-execs respective cloud-init on VMs (1-$VM_NUM)
-  restart_product.sh  - restarts product on VMs (1-$VM_NUM)
-  update_publicIP.sh  - re-creates public IP on VMs (1-$VM_NUM) \n
+  update_product.sh   - re-execs respective cloud-init on VMs ($vm_start-$vm_end)
+  restart_product.sh  - restarts product on VMs ($vm_start-$vm_end)
+  update_publicIP.sh  - re-creates public IP on VMs ($vm_start-$vm_end) \n
 ============================================================================\n\n"
 
 
