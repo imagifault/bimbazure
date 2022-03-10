@@ -73,7 +73,6 @@ while :; do
     echo -e "\\n$(date +"%F %H:%M") ==== BEGIN TARGETS LIST ====" | tee -a $LOG_PATH
     for t in ${TARGETS[@]}; do echo $t | tee -a $LOG_PATH; done
     echo -e "$(date +"%F %H:%M") ==== END TARGETS LIST ====\\n" | tee -a $LOG_PATH
-    # switch protonvpn server if protonvpn-cli is available
     for ran_targ in $(shuf -i 0-$(($NUM_TARGETS-1))); do
         echo -e "$(date +"%F %H:%M") INFO: RUN $run TARGET ${TARGETS[$ran_targ]}" | tee -a $LOG_PATH
         if [ -n "$(echo ${TARGETS[$ran_targ]} | grep http)" ]; then
