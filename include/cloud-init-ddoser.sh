@@ -58,12 +58,12 @@ if [ -f "$PID_PATH" ] && [ -n "$(cat $PID_PATH)" ]; then
 fi
 echo "$$" > $PID_PATH
 kill_stale
-rotate_file "${LOG_PATH}" $LOG_RETENTION "logs"
-echo -e "==== START $(date +"%F %H:%M") ====\n" | tee -a $LOG_PATH
-echo -e "$(date +"%F %H:%M") DEBUG: TIME_EACH=${TIME_EACH}s" | tee -a $LOG_PATH
 run=1
 
 while :; do
+  rotate_file "${LOG_PATH}" $LOG_RETENTION "logs"
+  echo -e "==== START $(date +"%F %H:%M") ====\n" | tee -a $LOG_PATH
+  echo -e "$(date +"%F %H:%M") DEBUG: TIME_EACH=${TIME_EACH}s" | tee -a $LOG_PATH
   echo -e "$(date +"%F %H:%M") INFO: BEGIN RUN $run" | tee -a $LOG_PATH
   docker run --pull always \
           --ulimit nofile=100000:100000 \
