@@ -34,18 +34,21 @@ pre-requisites:
 ```
 ============================================================================
 
+  Location:             westeurope
   Resource group:       group_DEMO
   VM base name:         we-demo
   Num VMs:              4
-  Product:              DDOSER
-  Concurrent log path:  ./concurrent_log
+  Starting with:        we-demo4
+  Ending with with:     we-demo4
+  Product:              MHDDOS
+  Concurrent log path:  ./concurrent_log 
 
 
-  create_vm.sh        - creates 4 (1-4) VMs with default product
-  delete_vm.sh        - deletes 4 (1-4) VMs and associated resources
+  create_vm.sh        - creates 1 (4-4) VMs
+  delete_vm.sh        - deletes 1 (4-4) VMs and associated resources
   update_product.sh   - re-execs respective cloud-init on VMs (1-4)
   restart_product.sh  - restarts product on VMs (1-4)
-  update_publicIP.sh  - re-creates public IP on VMs (1-4)
+  update_publicIP.sh  - re-creates public IP on VMs (1-4) 
 
 ============================================================================
 
@@ -58,7 +61,7 @@ pre-requisites:
 q - quit
 
 
-CMD number >
+CMD number > 
 ```
 
 
