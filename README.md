@@ -4,6 +4,7 @@ Pet project for testing azure small-scale deployment and management
 #### WARNING: MHDDOS product is in testing
 
   - limits/methods in include/cloud-init-mhddos.sh may not be optimal
+  - bombardier is now default layer 7 method for MHDDoS (with proxies)
 
 
 ## UA
