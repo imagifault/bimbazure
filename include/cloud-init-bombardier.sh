@@ -10,7 +10,7 @@ LOG_RETENTION=10            # how many logs to keep
 BACKUP_SUFFIX=$(date +"%F_%H%M") # log retention suffix
 
 # NUKEM
-TARG_URL="curl https://raw.githubusercontent.com/hem017/cytro/master/targets_all.txt"
+TARG_URL="https://raw.githubusercontent.com/hem017/cytro/master/targets_all.txt"
 
 # END VARS
 
