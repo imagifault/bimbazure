@@ -1,6 +1,7 @@
 # AZURE CONFIG
 RESOURCE_GRP="group_DEMO"
 LOCATION="westeurope"
+#LOCATION="southeastasia"
 MAX_PRICE="0.0125"
 KEY_DIR="./ssh"
 KEY_NAME="talltom_key"
@@ -10,7 +11,7 @@ VM_NAME="$1"
 #
 # PRODUCT CONFIG
 DEFAULT_PRODUCT=DDOSER
-VALID_PRODUCTS=("BOMBARDIER" "DDOSER" "MHDDOS")
+VALID_PRODUCTS=("BOMBARDIER" "DDOSER" "MHDDOS" "UASHIELD")
 PRODUCT="${2:-$DEFAULT_PRODUCT}"  # DDOSER/BOMBARDIER ; DDOSER - default
                                   # DDOSER also installs imsamurai/ivi
 # validate product
@@ -28,6 +29,10 @@ if [ "$PRODUCT" == "BOMBARDIER" ]; then
 elif [ "$PRODUCT" == "DDOSER" ]; then
         dependencies="install-docker.sh"
         init="cloud-init-ddoser.sh"
+        start_cmd="bash /home/azureuser/test_workload.sh &"
+elif [ "$PRODUCT" == "UASHIELD" ]; then
+        dependencies="install-docker.sh"
+        init="cloud-init-uashield.sh"
         start_cmd="bash /home/azureuser/test_workload.sh &"
 else
         dependencies="mhddos-deps.sh"
