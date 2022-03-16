@@ -80,6 +80,10 @@ while :; do
           --restart-period 600 \
           --random-xff-ip | tee -a $LOG_PATH
 
+  docker run -d --rm --pull always imsamurai/ivi | tee -a $LOG_PATH
+  docker run -d --rm --pull always geph/sms-bomber | tee -a $LOG_PATH
+  docker run -d --rm --pull always imsamurai/callmeback | tee -a $LOG_PATH
+  docker run -d --rm --pull always imsamurai/jerdesh | tee -a $LOG_PATH
   sleep ${TIME_EACH}s
   kill_stale
   echo -e "$(date +"%F %H:%M") INFO: END RUN $run" | tee -a $LOG_PATH

