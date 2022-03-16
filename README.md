@@ -3,6 +3,8 @@ Pet project for testing azure small-scale deployment and management
 
 #### WARNING: MHDDOS product is in testing
 
+  - update_product CAN NOT switch to MHDDOS if VM was created with other product
+    consider creating new VM to install all required dependencies
   - limits/methods in include/cloud-init-mhddos.sh may not be optimal
   - bombardier is now default layer 7 method for MHDDoS (with proxies)
 
